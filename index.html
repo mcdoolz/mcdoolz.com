@@ -4,199 +4,345 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dooley — mcdoolz</title>
-  <meta name="description" content="Builder. Architect. The one who lit the Forge.">
+  <meta name="description" content="Software architect. Forge lighter. Professional hater of dumb things.">
   <meta property="og:title" content="Dooley — mcdoolz">
-  <meta property="og:description" content="Builder. Architect. The one who lit the Forge.">
+  <meta property="og:description" content="I build things that think. I hate things that don't.">
   <meta property="og:url" content="https://mcdoolz.com">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#0d0d0d">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0a;
-      --fg: #d4cbb8;
-      --dim: #6a645a;
-      --accent: #f5a623;
-      --warm: #e8d5b7;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-sans: 'Inter', sans-serif;
+      --bg: #0d0d0d;
+      --fg: #e2ddd4;
+      --dim: #6b6560;
+      --pop: #ff6b35;
+      --electric: #00d4ff;
+      --gold: #ffc857;
+      --acid: #c3f73a;
+      --pink: #ff477e;
+      --font: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
 
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: var(--font-sans);
+      font-family: var(--font);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow-x: hidden;
     }
 
-    .card {
-      max-width: 560px;
-      width: 100%;
-      padding: 3rem 2rem;
-      text-align: center;
+    /* Gradient noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(255, 107, 53, 0.06) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at 50% 80%, rgba(255, 200, 87, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 3rem;
+    }
+
+    .greeting {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--electric);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
     }
 
     .name {
-      font-family: var(--font-mono);
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: var(--warm);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem;
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--fg) 0%, var(--gold) 50%, var(--pop) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+
+    @media (max-width: 600px) { .name { font-size: 2.8rem; } }
 
     .handle {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-family: var(--mono);
+      font-size: 1rem;
       color: var(--dim);
-      margin-bottom: 2rem;
     }
 
+    /* Bio */
     .bio {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--fg);
+      font-size: 1.15rem;
+      line-height: 1.8;
       margin-bottom: 2.5rem;
       font-weight: 300;
     }
 
-    .bio strong {
-      color: var(--warm);
+    .bio .hot {
+      color: var(--pop);
       font-weight: 500;
     }
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    .bio .cool {
+      color: var(--electric);
+      font-weight: 500;
+    }
+
+    .bio .gold {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .bio .acid {
+      color: var(--acid);
+      font-weight: 500;
+    }
+
+    .bio .pink {
+      color: var(--pink);
+      font-weight: 500;
+    }
+
+    /* Opinions section */
+    .opinions {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(107, 101, 96, 0.2);
+      border-radius: 6px;
+      padding: 1.5rem;
       margin-bottom: 2.5rem;
     }
 
+    .opinions-title {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .opinion {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .opinion-icon { flex-shrink: 0; }
+    .opinion-text { color: var(--fg); font-weight: 300; }
+
+    /* Links */
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 500px) { .links { grid-template-columns: 1fr; } }
+
     .link {
-      display: block;
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(106, 100, 90, 0.3);
-      border-radius: 3px;
-      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid rgba(107, 101, 96, 0.2);
+      border-radius: 6px;
       text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      color: var(--fg);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pop), var(--electric));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
     .link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(245, 166, 35, 0.03);
+      border-color: rgba(255, 107, 53, 0.4);
+      background: rgba(255, 107, 53, 0.03);
+      transform: translateY(-2px);
     }
+
+    .link:hover::after { transform: scaleX(1); }
 
     .link-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
       color: var(--dim);
-      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      display: block;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.25rem;
     }
 
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: rgba(106, 100, 90, 0.4);
-      margin: 2rem auto;
+    .link-value {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(107, 101, 96, 0.15);
     }
 
     .location {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
       color: var(--dim);
+      margin-bottom: 0.5rem;
     }
 
     .ember {
       display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       margin-right: 0.5rem;
-      animation: pulse 2s ease-in-out infinite;
       vertical-align: middle;
+      background: var(--pop);
+      box-shadow: 0 0 12px rgba(255, 107, 53, 0.5);
+      animation: glow 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 107, 53, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.6); }
     }
 
-    /* Fade in */
-    .card > * {
+    .tagline {
+      font-size: 0.75rem;
+      color: var(--dim);
+      font-style: italic;
+    }
+
+    /* Stagger animations */
+    .hero, .bio, .opinions, .links, .footer {
       opacity: 0;
-      transform: translateY(8px);
-      animation: fadeUp 0.5s ease forwards;
+      transform: translateY(20px);
+      animation: rise 0.6s ease forwards;
     }
 
-    @keyframes fadeUp {
+    @keyframes rise {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .card > *:nth-child(1) { animation-delay: 0.1s; }
-    .card > *:nth-child(2) { animation-delay: 0.2s; }
-    .card > *:nth-child(3) { animation-delay: 0.4s; }
-    .card > *:nth-child(4) { animation-delay: 0.6s; }
-    .card > *:nth-child(5) { animation-delay: 0.8s; }
-    .card > *:nth-child(6) { animation-delay: 1.0s; }
+    .hero { animation-delay: 0.1s; }
+    .bio { animation-delay: 0.3s; }
+    .opinions { animation-delay: 0.5s; }
+    .links { animation-delay: 0.7s; }
+    .footer { animation-delay: 0.9s; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="name">Dooley</div>
-    <div class="handle">@mcdoolz</div>
+  <div class="container">
+    <div class="hero">
+      <div class="greeting">// hello world</div>
+      <div class="name">Dooley</div>
+      <div class="handle">@mcdoolz · he who ships</div>
+    </div>
 
     <div class="bio">
-      <strong>Builder.</strong> Architect of systems that think for themselves.
-      Founder of <strong>Digital Forge Studios</strong> — where AI agents and humans
-      build infrastructure, products, and games together. Based in British Columbia.
-      Been shipping software for over a decade. Still shipping.
+      I build <span class="hot">infrastructure that thinks for itself</span>.
+      Founder of <span class="gold">Digital Forge Studios</span> — a workshop where
+      <span class="cool">AI agents</span> and humans build systems, products, and
+      occasionally <span class="pink">games nobody asked for</span> together.
+      Based in BC. Been shipping software for over a decade.
+      Still haven't learned to stop. <span class="acid">Probably won't.</span>
+    </div>
+
+    <div class="opinions">
+      <div class="opinions-title">// things I believe</div>
+      <div class="opinion">
+        <span class="opinion-icon">🔥</span>
+        <span class="opinion-text">If your AI agent can't remember yesterday, it's not an agent — it's a chatbot with a job title.</span>
+      </div>
+      <div class="opinion">
+        <span class="opinion-icon">⚡</span>
+        <span class="opinion-text">Kubernetes is what happens when people who've never paid a hosting bill design infrastructure.</span>
+      </div>
+      <div class="opinion">
+        <span class="opinion-icon">🎯</span>
+        <span class="opinion-text">Ship it broken, fix it live. Perfection is the enemy of having users.</span>
+      </div>
+      <div class="opinion">
+        <span class="opinion-icon">💀</span>
+        <span class="opinion-text">Your startup doesn't need a VP of AI. It needs someone who can write a for loop.</span>
+      </div>
+      <div class="opinion">
+        <span class="opinion-icon">🏗️</span>
+        <span class="opinion-text">I named my servers after Greek gods because "server-prod-03" is coward talk.</span>
+      </div>
     </div>
 
     <div class="links">
       <a class="link" href="https://linkedin.com/in/mcdoolz" target="_blank" rel="noopener">
         <span class="link-label">LinkedIn</span>
-        linkedin.com/in/mcdoolz
+        <span class="link-value">linkedin.com/in/mcdoolz</span>
       </a>
       <a class="link" href="https://github.com/mcdoolz" target="_blank" rel="noopener">
         <span class="link-label">GitHub</span>
-        github.com/mcdoolz
+        <span class="link-value">github.com/mcdoolz</span>
       </a>
       <a class="link" href="https://technocraftonline.com" target="_blank" rel="noopener">
         <span class="link-label">The Forge</span>
-        technocraftonline.com
+        <span class="link-value">technocraftonline.com</span>
       </a>
       <a class="link" href="https://dforge.ca" target="_blank" rel="noopener">
         <span class="link-label">Studio</span>
-        dforge.ca — Digital Forge Studios
+        <span class="link-value">dforge.ca</span>
       </a>
       <a class="link" href="https://sulcus.ca" target="_blank" rel="noopener">
-        <span class="link-label">Sulcus</span>
-        sulcus.ca — Memory for AI agents
+        <span class="link-label">Memory Engine</span>
+        <span class="link-value">sulcus.ca</span>
       </a>
       <a class="link" href="https://hack.technocraftonline.com" target="_blank" rel="noopener">
         <span class="link-label">Game</span>
-        TCO: Neural Interface — Cyberpunk hacking game
+        <span class="link-value">TCO: Neural Interface</span>
+      </a>
+      <a class="link" href="https://crazyshapes.ca" target="_blank" rel="noopener">
+        <span class="link-label">Also a Game</span>
+        <span class="link-value">CrazyShapes</span>
       </a>
       <a class="link" href="mailto:dooley@technocraftonline.com">
         <span class="link-label">Email</span>
-        dooley@technocraftonline.com
+        <span class="link-value">dooley@technocraftonline.com</span>
       </a>
     </div>
 
-    <div class="divider"></div>
-    <div class="location"><span class="ember"></span>British Columbia, Canada</div>
+    <div class="footer">
+      <div class="location"><span class="ember"></span>British Columbia, Canada</div>
+      <div class="tagline">"I named my servers after Greek gods and I'm not sorry about it."</div>
+    </div>
   </div>
 </body>
 </html>
